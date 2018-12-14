@@ -1,0 +1,48 @@
+{
+  "name": "ChatPubNub",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kolesnikovtgn/ChatPubNub.git"
+  },
+  "author": "Kolesnikov Vladimir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kolesnikovtgn/layout3/issues"
+  },
+  "homepage": "https://github.com/kolesnikovtgn/layout3#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
+    "css-loader": "^1.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "lodash-webpack-plugin": "^0.11.5",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
+    "modernizr": "^3.6.0"
+  }
+}
