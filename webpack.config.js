@@ -58,10 +58,17 @@ module.exports = {
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       hash: true,
-      title: 'ChatPunNub',
-      template: './src/index.html',
+      title: 'ChatPubNub',
+      template: './src/Chat.html',
       path: path.join(__dirname, './dist/'),
-      filename: 'index.html',
+      filename: 'Chat.html',
+    }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      title: 'ChatPubNub',
+      template: './src/Login.html',
+      path: path.join(__dirname, './dist/'),
+      filename: 'Login.html',
     }),
     new LodashModuleReplacementPlugin({
       collections: true,
