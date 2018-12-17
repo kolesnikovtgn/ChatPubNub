@@ -1,4 +1,4 @@
-<!doctype html>
+    <!doctype html>
 <html>
 <head>
     <title>ChatPubNub</title>
@@ -11,18 +11,16 @@
 <main class="login">
     <div class="login__block">
         <h1 class="login__article"> Welcome to ChatPubNub</h1>
-        <div class="login__input">
+        <form id="login" class="login__input">
             <input id="userName" type="text" placeholder="Enter your name"/>
             <button id="joinButton" class="btn btn-primary joinButton">Join</button>
-        </div>
+        </form>
     </div>
 </main>
-<!--<script type="text/javascript">-->
-  <!--function joinRoom() {-->
-    <!--debugger;-->
-    <!--let uuid = $('#userName').val();-->
-    <!--window.location = 'Chat.html?uuid=' + uuid;-->
-  <!--}-->
-<!--</script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.18/dist/chat-engine.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../dist/bundle.js"></script>
 </body>
 </html>
