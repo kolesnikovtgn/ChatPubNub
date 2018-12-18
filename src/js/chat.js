@@ -86,19 +86,10 @@ const sendMessage = () => {
 
 const renderMessage = (message, isHistory = false) => {
   let template = userTemplate;
-
-  console.log('THIS MY INFO');
-  console.log(message.data.text);
-  console.log(message.sender.uuid);
-  console.log('THIS MY INFO');
-
   if (message.sender.uuid === me.uuid) {
     template = meTemplate;
   }
-
   const el = template(message.data.text, getMsgDate(), message.sender.uuid);
-
-  // render the message
   if (isHistory) {
     $('.msg_history ul').prepend(el);
   } else {
@@ -113,10 +104,6 @@ const init = () => {
   ChatEngine.on('$.ready', (data) => {
     me = data.me; // eslint-disable-line
     myChat = new ChatEngine.Chat('chatpubnub');
-    console.log(me);
-    console.log(ChatEngine.chats);
-    console.log(myChat.users);
-    console.log(data.me.uuid);
     myChat.on('$.online.*', (data1) => {
       $('#people-list ul').append(peopleTemplate(data1.user.uuid));
     });
@@ -131,11 +118,9 @@ const init = () => {
         event: 'message',
         limit: 50,
       }).on('message', (data3) => {
-        console.log(data);
         renderMessage(data3, true);
       });
     });
-
     $('#sendMessage').on('submit', sendMessage);
   });
 };
