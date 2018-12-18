@@ -8,7 +8,8 @@ const ChatEngine = ChatEngineCore.create({
 
 let myChat;
 let me;
-const newPerson = 'Vova';
+const sourceLanguage = 'en';
+const targetLanguage = 'es';
 
 const getMsgDate = () => {
   const dateMsg = new Date();
@@ -53,122 +54,93 @@ const peopleTemplate = person => `
             </div>
           </div>`;
 
-// const joinRoom = () => {
-//   $('#login').on('submit', (event) => {
-//     newPerson = $('#userName').val();
-//   });
-//
-// window.location.replace(`Chat.html?uuid=${newPerson}`);
-// };
-
-// send a message to the Chat
-const sendMessage = () => {
-  // get the message text from the text input
-  const message = $('#message-to-send').val().trim();
-
-  // if the message isn't empty
-  if (message.length) {
-    // emit the `message` event to everyone in the Chat
-    myChat.emit('message', {
-      text: message,
-    });
-
-    // clear out the text input
-    $('#message-to-send').val('');
-  }
-
-  // stop form submit from bubbling
-  return false;
+const joinRoom = () => {
+  $('#login').on('submit', (e) => {
+    e.preventDefault();
+    const newPerson = $('#userName').val();
+    if (newPerson) {
+      window.location.replace(`Chat.html?uuid=${newPerson}`);
+    }
+  });
 };
 
-
-// scroll to the bottom of the window
 const scrollToBottom = () => {
   $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
 };
 
-// render messages in the list
+const sendMessage = () => {
+  const message = $('#message-to-send').val().trim();
+  if (message.length) {
+    myChat.emit('message', {
+      text: message,
+      translate: {
+        text: message,
+        source: sourceLanguage,
+        target: targetLanguage,
+      },
+    });
+    $('#message-to-send').val('');
+  }
+  return false;
+};
+
 const renderMessage = (message, isHistory = false) => {
-  // use the generic user template by default
   let template = userTemplate;
 
-  if (message.sender === me) {
+  console.log('THIS MY INFO');
+  console.log(message.data.text);
+  console.log(message.sender.uuid);
+  console.log('THIS MY INFO');
+
+  if (message.sender.uuid === me.uuid) {
     template = meTemplate;
   }
-  const el = template({
-    text: message.data.text,
-    time: getMsgDate(),
-    user: newPerson,
-  });
+
+  const el = template(message.data.text, getMsgDate(), message.sender.uuid);
 
   // render the message
   if (isHistory) {
-    $('.msg_history ul').prepend();
+    $('.msg_history ul').prepend(el);
   } else {
     $('.msg_history ul').append(el);
   }
-
-  // scroll to the bottom of the chat
   scrollToBottom();
 };
 
 const init = () => {
-  ChatEngine.connect(newPerson);
+  const username = window.location.search.substring(1).split('=')[1];
+  ChatEngine.connect(username);
   ChatEngine.on('$.ready', (data) => {
     me = data.me; // eslint-disable-line
-    myChat = new ChatEngine.Chat('myChat');
-    myChat.on('message', (message) => {
-      // renderMessage(message);
-      console.log(message);
+    myChat = new ChatEngine.Chat('chatpubnub');
+    console.log(me);
+    console.log(ChatEngine.chats);
+    console.log(myChat.users);
+    console.log(data.me.uuid);
+    myChat.on('$.online.*', (data1) => {
+      $('#people-list ul').append(peopleTemplate(data1.user.uuid));
     });
+    myChat.on('$.offline.*', (data2) => {
+      $('#people-list ul').find(`#${data2.user.uuid}`).remove();
+    });
+    myChat.on('message', (message) => {
+      renderMessage(message);
+    });
+    myChat.on('$.connected', () => {
+      myChat.search({
+        event: 'message',
+        limit: 50,
+      }).on('message', (data3) => {
+        console.log(data);
+        renderMessage(data3, true);
+      });
+    });
+
+    $('#sendMessage').on('submit', sendMessage);
   });
 };
 
-// // this is our main function that starts our chat app
-// const init = () => {
-//   // connect to ChatEngine with our generated user
-//   ChatEngine.connect(newPerson);
-//
-//   // when ChatEngine is booted, it returns your new User as `data.me`
-//   ChatEngine.on('$.ready', (data) => {
-//     // store my new user as `me`
-//     me = data.me; // eslint-disable-line
-//     // create a new ChatEngine Chat
-//     myChat = new ChatEngine.Chat('myChat');
-//     console.log(data.user);
-//     // when we recieve messages in this chat, render them
-//     myChat.on('message', (message) => {
-//       renderMessage(message);
-//     });
-//     // when a user comes online, render them in the online list
-//     myChat.on('$.online.*', () => {
-//       $('#people-list ul').append(peopleTemplate(`${data.user} qwerttttttty`));
-//     });
-//
-//     // when a user goes offline, remove them from the online list
-//     myChat.on('$.offline.*', () => {
-//       $('#people-list ul').find(`#${data.user.uuid}`).remove();
-//     });
-//
-//     // wait for our chat to be connected to the internet
-//     myChat.on('$.connected', () => {
-//       // search for 50 old `message` events
-//       myChat.search({
-//         event: 'message',
-//         limit: 50,
-//       }).on('message', () => {
-//         console.log(data);
-//
-//         // when messages are returned, render them like normal messages
-//         renderMessage(data, true);
-//       });
-//     });
-//
-//     // bind our "send" button and return key to send message
-//     $('#sendMessage').on('submit', sendMessage);
-//   });
-// };
-
-// joinRoom();
-// boot the app
-init();
+$(document).ready(() => {
+  joinRoom();
+  init();
+});
