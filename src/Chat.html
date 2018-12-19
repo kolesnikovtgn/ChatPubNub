@@ -4,54 +4,31 @@
     <meta charset="UTF-8">
     <title>ChatPubNub</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" 
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="../dist/style.css">
 </head>
 <body>
 <div class="container">
     <h3 class=" text-center">ChatPubNub</h3>
-    <div class="messaging">
-        <div class="inbox_msg">
-            <div class="inbox_people">
+    <div class="chatbox">
+        <div class="chatbox__container">
+            <div class="chatbox__users">
                 <div class="people-list" id="people-list">
                     <ul class="list">
                     </ul>
                 </div>
-
-                    <!--<div class="chat_list">-->
-                        <!--<div class="chat_people">-->
-                            <!--<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>-->
-                            <!--<div class="chat_ib">-->
-                                <!--<span>Vova Kolesnikov</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
             </div>
-            <div class="mesgs">
-                <div class="msg_history">
+            <div class="chatbox__messages">
+                <div class="chatbox__messages-history">
                     <ul></ul>
-                    <!--<div class="incoming_msg">-->
-                        <!--<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>-->
-                        <!--<div class="received_msg">-->
-                            <!--<div class="received_withd_msg">-->
-                                <!--<p>Test which is a new approach to have all-->
-                                    <!--solutions</p>-->
-                                <!--<span class="time_date"> 11:01 AM    |    June 9</span></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="outgoing_msg">-->
-                        <!--<div class="sent_msg">-->
-                            <!--<p>Test which is a new approach to have all-->
-                                <!--solutions</p>-->
-                            <!--<span class="time_date"> 00:00 AM    |    June 9</span> </div>-->
-                    <!--</div>-->
-
                 </div>
-                <div class="type_msg">
-                    <form id="sendMessage" class="input_msg_write">
-                        <input id="message-to-send" type="text" class="write_msg" placeholder="Type a message" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
+                <div class="chatbox__messages-input">
+                    <form id="sendMessage" class="chatbox__messages-form">
+                        <input id="messageToSend" type="text" placeholder="Type a message" />
+                        <button class="chatbox__messages-button" type="button">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
                     </form>
                 </div>
             </div>
