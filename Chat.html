@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatPubNub</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" 
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="../dist/style.css">
+<link href="style.css?9c822c82eb5df1a98a53" rel="stylesheet"></head>
+<body>
+<div class="container">
+    <h3 class=" text-center">ChatPubNub</h3>
+    <div class="chatbox">
+        <div class="chatbox__container">
+            <div class="chatbox__users">
+                <div class="people-list" id="people-list">
+                    <ul class="list">
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div class="chatbox__messages-history">
+                    <ul></ul>
+                </div>
+                <div class="chatbox__messages-input">
+                    <form id="sendMessage" class="chatbox__messages-form">
+                        <input id="messageToSend" type="text" placeholder="Type a message" />
+                        <button class="chatbox__messages-button" type="button">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.18/dist/chat-engine.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../dist/bundle.js"></script>
+<script type="text/javascript" src="bundle.js?9c822c82eb5df1a98a53"></script></body>
+</html>
