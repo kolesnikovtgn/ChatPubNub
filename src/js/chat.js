@@ -5,7 +5,6 @@ const ChatEngine = ChatEngineCore.create({
   subscribeKey: 'sub-c-acc8e784-cd70-11e8-b02a-a6a8b6327be1',
 });
 
-
 let myChat;
 let me;
 const sourceLanguage = 'en';
@@ -18,7 +17,7 @@ const getMsgDate = () => {
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
   return `${dateMsg.getHours()}:${dateMsg.getMinutes()}
-|  ${monthNames[dateMsg.getMonth()]} ${dateMsg.getDay()}`;
+          | ${monthNames[dateMsg.getMonth()]} ${dateMsg.getDay()}`;
 };
 
 const meTemplate = (text, time) => `
@@ -43,12 +42,12 @@ const userTemplate = (text, time, user) => `
           </div>`;
 
 const peopleTemplate = person => `
-          <div class="chat_list">
-            <div class="chat_people">
-              <div class="chat_img">
+          <div class="person">
+            <div class="person__container">
+              <div class="person__img">
                 <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
               </div>
-              <div class="chat_ib">
+              <div class="person__name">
                 <span>${person}</span>
               </div>
             </div>
@@ -65,11 +64,11 @@ const joinRoom = () => {
 };
 
 const scrollToBottom = () => {
-  $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
+  $('.chatbox__messages-history').scrollTop($('.chatbox__messages-history')[0].scrollHeight);
 };
 
 const sendMessage = () => {
-  const message = $('#message-to-send').val().trim();
+  const message = $('#messageToSend').val().trim();
   if (message.length) {
     myChat.emit('message', {
       text: message,
@@ -79,7 +78,7 @@ const sendMessage = () => {
         target: targetLanguage,
       },
     });
-    $('#message-to-send').val('');
+    $('#messageToSend').val('');
   }
   return false;
 };
@@ -91,9 +90,9 @@ const renderMessage = (message, isHistory = false) => {
   }
   const el = template(message.data.text, getMsgDate(), message.sender.uuid);
   if (isHistory) {
-    $('.msg_history ul').prepend(el);
+    $('.chatbox__messages-history ul').prepend(el);
   } else {
-    $('.msg_history ul').append(el);
+    $('.chatbox__messages-history ul').append(el);
   }
   scrollToBottom();
 };
